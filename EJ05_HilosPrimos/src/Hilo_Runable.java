@@ -9,8 +9,8 @@ public class Hilo_Runable implements Runnable {
 
 	@Override
 	public void run() {
+		double startTime=System.nanoTime();
 
-		System.out.println("Arrancando hilo: " + Thread.currentThread().getName());
 
 		boolean prime = true;
 		for (int i = 2; i < numeroPrimo; i++) {
@@ -25,6 +25,8 @@ public class Hilo_Runable implements Runnable {
 			System.out.println("El numero "+numeroPrimo+" NO es primo");
 
 		}
+		double time=System.nanoTime()-startTime;
+		System.out.println("Tiempo del hilo "+Thread.currentThread().getName()+" :"+ time);
 	}
 
 }
