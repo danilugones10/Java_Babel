@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<!-- Para dar de alta un contexto de spring por XML, usaremos un fichero 
+		de este tipo, y lo llamaremos desde la app. Dentro de este fichero podremos 
+		dar de alta todos los beans que queramos dentro de nuestro contexto de Spring. 
+		En este ejemplo solo vamos a tener un bean creado a partir de la clase ejemplo01.Mensaje. 
+		Para dar de alta un bean en el contexto de spring usaremos la etiqueta "bean" 
+		y tendrá que tener al menos un identificador del biean "id", y la class que 
+		tiene que usar Spring para instanciar el objeto De manera basica, debemos 
+		de tener en la clase el constructor sin parametros El ciclo de vida de los 
+		beans en Spring es por defecto de tipo "Singleton" que se traduce en que 
+		el objeto sera unico para toda la duracion del contexto de spring. Hablaremos 
+		de otros ciclos de vida más adelante -->
+
+
+	<!-- Ya que los objetos tienen propiedades, tambien podemos hacer que cuando 
+		creemos en bean en el contexto de spring, cambiar el valor de dichas propiedades 
+		Para ello, el objeto tiene que contar con metodos modificadores, es decir 
+		"setters" -->
+
+	<!-- RAM -->
+	<bean id="ram1" class="ordenador.RAM" scope="singleton">
+		<property name="precio" value="#{T(java.lang.Math).random() * 50 + 70 }"></property>
+		<property name="hz" value="3000"></property>
+		<property name="generacion" value="DDR6"></property>
+	</bean>
+	<bean id="ram2" class="ordenador.RAM" scope="singleton">
+		<property name="precio" value="#{T(java.lang.Math).random() * 50 + 70 }"></property>
+		<property name="hz" value="3000"></property>
+		<property name="generacion" value="DDR6"></property>
+	</bean>
+	<bean id="rgraf" class="ordenador.RAM" scope="singleton">
+		<property name="precio" value="#{T(java.lang.Math).random() * 50 + 70 }"></property>
+		<property name="hz" value="3000"></property>
+		<property name="generacion" value="DDR6"></property>
+	</bean>
+
+	<bean id="listaRam" class="java.util.ArrayList">
+		<constructor-arg>
+			<list value-type="ordenador.RAM">
+				<ref bean="ram1" />
+				<ref bean="ram2" />
+				<ref bean="rgraf"/>
+			</list>
+		</constructor-arg>
+	</bean>
+	
+	
+	<!-- PLACA BASE -->
+	<bean id="placa" class="ordenador.Placa">
+		<property name="precio" value="#{T(java.lang.Math).random() * 50 + 70 }"></property>
+		<property name="marca" value="Asus"></property>
+		<property name="modelo" value="Modelo"></property>
+	</bean>
+	
+	
+	<!-- PROCESADOR -->
+	<bean id="procesador" class="ordenador.Procesador" scope="singleton">
+		<property name="precio" value="#{T(java.lang.Math).random() * 50 + 70 }"></property>
+		<property name="marca" value="Intell"></property>
+		<property name="hz" value="4.5"></property>
+	</bean>
+
+
+	<!-- TARJETA GRÁFICA -->
+	<bean id="grafica1" class="ordenador.TarjetaGrafica" scope="singleton">
+		<property name="precio" value="#{T(java.lang.Math).random() * 50 + 70 }"></property>
+		<property name="marca" value="Nvidia"></property>
+		<property name="ram" ref="rgraf"></property>
+		<property name="modelo" value="gtx1080"></property>
+	</bean>
+
+	<bean id="listaTarjetaGrafica" class="java.util.ArrayList">
+		<constructor-arg>
+			<list value-type="ordenador.TarjetaGrafica">
+				<ref bean="grafica1" />
+			</list>
+		</constructor-arg>
+	</bean>
+
+
+	<!-- PERIFÉRICOS -->
+
+	<bean id="periferico1" class="ordenador.Perifericos">
+		<property name="nombre" value="Teclado"></property>
+		<property name="precio" value="#{T(java.lang.Math).random() * 50 + 70 }"></property>
+		<property name="marca" value="IBM"></property>
+	</bean>
+	<bean id="periferico2" class="ordenador.Perifericos">
+		<property name="nombre" value="Raton"></property>
+		<property name="precio" value="#{T(java.lang.Math).random() * 50 + 70 }"></property>
+		<property name="marca" value="Samsung"></property>
+	</bean>
+	<bean id="listaPerifericos" class="java.util.ArrayList">
+		<constructor-arg>
+			<list value-type="ordenador.Periferico">
+				<ref bean="periferico1" />
+				<ref bean="periferico2" />
+			</list>
+		</constructor-arg>
+	</bean>
+	
+	<!-- PC -->
+	<bean id="pc" class="ordenador.Ordenador" scope="singleton" autowire="byName" init-method="calcularPrecio">
+		<property name="marca" value="#{pc.randomMarcaOrdenador()}"></property>
+		<property name="precio" value="#{ram1.precio+ram2.precio+rgraf.precio+placa.precio+procesador.precio+grafica1.precio+periferico1.precio+periferico2.precio}"></property>
+		<!-- <property name="precio" value="#{pc.calcularPrecio()}"></property> -->
+	</bean>
+</beans>
