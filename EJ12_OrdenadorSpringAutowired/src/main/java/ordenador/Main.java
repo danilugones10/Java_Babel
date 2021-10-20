@@ -11,6 +11,10 @@ public class Main {
 		context = new ClassPathXmlApplicationContext("ApplicationContext01.xml");
 		
 		Ordenador pc1 = context.getBean("pc", Ordenador.class);
+		// El numero que sale por consola es el precio de todo el ordenador al poner en el init-method del
+		// bean del ordenador el metodo de calcularPrecio()
+		
+//		System.out.println(pc1);
 //		System.out.println("El precio del ordenador es de: "+pc1.getPrecio());
 //		System.out.println("El precio de los componentes es de: "+pc1.calcularPrecio());
 		DaoOrdenador.convertir(pc1);
