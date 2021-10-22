@@ -7,7 +7,6 @@ import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Component;
 
 import es.curso.entity.Cliente;
-import es.curso.entity.Pedido;
 
 @Component
 public class DaoClienteRowMapper implements RowMapper<Cliente>{
@@ -18,7 +17,7 @@ public class DaoClienteRowMapper implements RowMapper<Cliente>{
 		p.setId(rs.getInt("ID"));
 		p.setNombre(rs.getString("NOMBRE"));
 		p.setEdad(rs.getInt("EDAD"));
-		p.setListaPedidos((Pedido) rs.getArray("LISTAPEDIDOS"));
+		p.setPedido_id(rs.getInt("PEDIDO_ID"));
 		return p;
 	}
 

@@ -2,6 +2,11 @@ package es.curso.entity;
 
 import java.util.Date;
 
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Component;
+
+@Component
+@Scope("prototype")
 public class Pedido {
 	
 	private int id;
@@ -39,6 +44,10 @@ public class Pedido {
 	public void setFecha(Date fecha) {
 		this.fecha = fecha;
 	}
-	
+
+	@Override
+	public String toString() {
+		return "Pedido [id=" + id + ", importe=" + importe + ", fecha=" + fecha + "]";
+	}
 	
 }

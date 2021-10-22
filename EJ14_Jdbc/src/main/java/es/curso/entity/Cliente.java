@@ -7,21 +7,22 @@ import org.springframework.stereotype.Component;
 @Scope("prototype")
 public class Cliente {
 
+	
 	private int id;
 	private String nombre;
 	private int edad;
-	private Pedido listaPedidos;
+	private int pedido_id;
 	
 	public Cliente() {
 		super();
 	}
 	
-	public Cliente(int id, String nombre, int edad, Pedido listaPedidos) {
+	public Cliente(int id, String nombre, int edad, int pedido_id) {
 		super();
 		this.id = id;
 		this.nombre = nombre;
 		this.edad = edad;
-		this.listaPedidos = listaPedidos;
+		this.pedido_id = pedido_id;
 	}
 
 
@@ -43,11 +44,15 @@ public class Cliente {
 	public void setEdad(int edad) {
 		this.edad = edad;
 	}
-	public Pedido getListaPedidos() {
-		return listaPedidos;
+	public int getPedido_id() {
+		return pedido_id;
 	}
-	public void setListaPedidos(Pedido listaPedidos) {
-		this.listaPedidos = listaPedidos;
+	public void setPedido_id(int pedido_id) {
+		this.pedido_id = pedido_id;
 	}
 	
+	@Override
+	public String toString() {
+		return "Cliente [id=" + id + ", nombre=" + nombre + ", edad=" + edad + ", pedido_id=" + pedido_id + "]";
+	}
 }

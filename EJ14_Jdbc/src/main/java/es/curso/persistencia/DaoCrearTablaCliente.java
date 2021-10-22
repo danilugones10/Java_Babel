@@ -20,13 +20,13 @@ public class DaoCrearTablaCliente implements DaoCliente{
 	
 	@Override
 	public int insertar(Cliente p) {
-		String query = "insert into cliente (EDAD, NOMBRE, LISTAPEDIDOS) values (?, ?, ?)";
+		String query = "insert into cliente (EDAD, NOMBRE, PEDIDO_ID) values (?, ?, ?)";
 		
 		//Le pasamos la query y los valores de las "?" en orden
 		int id = jdbcTemplate.update(query,
 				p.getEdad(),
 				p.getNombre(),
-				p.getListaPedidos()
+				p.getPedido_id()
 			);
 		
 		return id;	
@@ -34,13 +34,13 @@ public class DaoCrearTablaCliente implements DaoCliente{
 
 	@Override
 	public int modificar(Cliente p) {
-		String query = "update cliente SET EDAD=?, NOMBRE=?, LISTAPEDIDOS=? where id=?";
+		String query = "update cliente SET EDAD=?, NOMBRE=?, PEDIDO_ID=? where id=?";
 		
 		//Al final el update sive para modificar la BBDD
 		int id = jdbcTemplate.update(query,
 				p.getEdad(),
 				p.getNombre(),
-				p.getListaPedidos(),
+				p.getPedido_id(),
 				p.getId()
 			);
 		
