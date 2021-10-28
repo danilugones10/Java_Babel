@@ -33,18 +33,30 @@ public class Controlador {
 		
 		String usuario = request.getParameter("usuario");
 		String contraseña = request.getParameter("pass");
-		Usuario u = DaoUsu.obtener(usuario, contraseña);
 		
-		System.out.println(gUsuario.findById(u.getId()));
-		
+		List<Usuario> listaUsuario = gUsuario.findByUsuario(usuario);	
 		List<Videojuego> listaVideojuego = gVideojuego.findAll();		
 		request.setAttribute("lista", listaVideojuego);
 		
-		if (u != null) {
+		boolean usuarioCorrecto=false;
+		boolean contraseñaCorrecta=false;
+		
+		for (Usuario u : listaUsuario) {
+			if(u.getUsuario().equals(usuario)) {
+				usuarioCorrecto=true;
+				if (u.getContrasena().equals(contraseña)) {
+					contraseñaCorrecta=true;
+				}
+			}
+		}
+		
+		if((usuarioCorrecto==true)&&(contraseñaCorrecta==true)) {
 			return "listadoVideojuegos";
-		} else {
+		}
+		else {
 			return "error";
 		}
+		
 
 	}
 	
