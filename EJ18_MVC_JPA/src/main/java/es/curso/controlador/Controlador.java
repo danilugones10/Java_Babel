@@ -17,11 +17,7 @@ import es.curso.modelo.persistencia.DaoVideo;
 
 @Controller
 public class Controlador {
-//	private static ApplicationContext context =
-//	new AnnotationConfigApplicationContext(Configuracion.class);
-//	DaoVideo gVideojuego = context.getBean(DaoVideo.class);
-//	DaoUsu gUsuario = context.getBean(DaoUsu.class);
-	
+
 	@Autowired
 	DaoUsu gUsuario;
 	@Autowired
@@ -39,7 +35,7 @@ public class Controlador {
 		String contraseña = request.getParameter("pass");
 		Usuario u = DaoUsu.obtener(usuario, contraseña);
 		
-		System.out.println(gUsuario.findById(1));
+		System.out.println(gUsuario.findById(u.getId()));
 		
 		List<Videojuego> listaVideojuego = gVideojuego.findAll();		
 		request.setAttribute("lista", listaVideojuego);
@@ -58,10 +54,8 @@ public class Controlador {
 		String idd = id;
 		int id2=Integer.parseInt(idd);
 		
-		Videojuego v=gVideojuego.findById(id2).get();
-		
-		if(v != null) {
-			request.setAttribute("v", v);
+		if(gVideojuego.findById(id2).isEmpty() != true) {
+			request.setAttribute("v", gVideojuego.findById(id2).get());
 			return "videojuego";
 		}else {
 			return "error";
