@@ -1,5 +1,8 @@
 package es.curso.modelo.entidad;
 
+import org.springframework.stereotype.Component;
+
+@Component
 public class Usuario {
 	private int id;
 	private String usuario;

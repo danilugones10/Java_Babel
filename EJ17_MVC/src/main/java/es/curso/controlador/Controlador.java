@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -17,6 +18,12 @@ import es.curso.modelo.negocio.GestorVideojuego;
 @Controller
 public class Controlador {
 	
+	@Autowired
+	private GestorUsuario gestorUsuario;
+	
+	@Autowired
+	private GestorVideojuego gestorVideojuego;
+	
 	@GetMapping("login")
 	public String getLogin() {
 		return "loginSaludo";
@@ -24,16 +31,12 @@ public class Controlador {
 
 	@PostMapping("login")
 	public String login(@RequestParam("usuario") String username, @RequestParam("pass") String password,HttpServletRequest request) {
-
-		GestorUsuario gp = new GestorUsuario();
 		
 		String usuario = request.getParameter("usuario");
 		String contraseña = request.getParameter("pass");
-		Usuario u = gp.obtener(usuario, contraseña);
+		Usuario u = gestorUsuario.obtener(usuario, contraseña);
 		
-		GestorVideojuego gv = new GestorVideojuego();
-		
-		List<Videojuego> listaVideojuego = gv.listar();
+		List<Videojuego> listaVideojuego = gestorVideojuego.listar();
 		
 		request.setAttribute("lista", listaVideojuego);
 		
@@ -47,13 +50,11 @@ public class Controlador {
 	
 	@PostMapping("juego")
 	public String videojuego(@RequestParam("id") String id,HttpServletRequest request) {
-
-		GestorVideojuego gp = new GestorVideojuego();
 		
 		String idd = id;
 		int id2=Integer.parseInt(idd);
 		
-		Videojuego v=gp.obtener(id2);
+		Videojuego v=gestorVideojuego.obtener(id2);
 		
 		if(v != null) {
 			request.setAttribute("v", v);

@@ -1,5 +1,8 @@
 package es.curso.modelo.entidad;
 
+import org.springframework.stereotype.Component;
+
+@Component
 public class Videojuego {
 
 	private int id;

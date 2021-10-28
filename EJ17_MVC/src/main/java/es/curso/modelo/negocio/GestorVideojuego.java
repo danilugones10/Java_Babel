@@ -2,9 +2,12 @@ package es.curso.modelo.negocio;
 
 import java.util.List;
 
+import org.springframework.stereotype.Service;
+
 import es.curso.modelo.entidad.Videojuego;
 import es.curso.modelo.persistencia.DaoVideojuego;
 
+@Service
 public class GestorVideojuego {
 
 	private DaoVideojuego daoVideojuego;

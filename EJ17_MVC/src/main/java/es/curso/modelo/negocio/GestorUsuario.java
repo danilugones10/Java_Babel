@@ -2,9 +2,12 @@ package es.curso.modelo.negocio;
 
 import java.util.List;
 
+import org.springframework.stereotype.Service;
+
 import es.curso.modelo.entidad.Usuario;
 import es.curso.modelo.persistencia.DaoUsuario;
 
+@Service
 public class GestorUsuario {
 	
 	public DaoUsuario daoUsuario;
