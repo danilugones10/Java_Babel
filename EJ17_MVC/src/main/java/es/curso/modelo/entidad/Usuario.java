@@ -1,6 +1,5 @@
 package es.curso.modelo.entidad;
 
-
 public class Usuario {
 	private int id;
 	private String usuario;
